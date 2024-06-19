@@ -31,6 +31,21 @@ void ADataActorBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (mFloatCurve)
+	{
+		if (mCurrentRotation <= mRotationDuration)
+		{
+			mCurrentRotation += DeltaTime;
+			const float TimeRatio = FMath::Clamp(mCurrentRotation / mRotationDuration, 0.f, 1.0f);
+			const float RotationAlpha = mFloatCurve->GetFloatValue(TimeRatio);
 
+			const FRotator CurrentRotation = FMath::Lerp(FRotator::ZeroRotator, FRotator(0.f, 180.f, 0.f), RotationAlpha);
+			SetActorRotation(CurrentRotation);
+		}
+		else
+		{
+			mCurrentRotation = 0.f;
+		}
+	}
 }
 

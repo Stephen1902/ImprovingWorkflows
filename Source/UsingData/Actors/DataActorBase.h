@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "../Data/Datalibrary.h"
 #include "DataActorBase.generated.h"
+
 
 class USphereComponent;
 
@@ -21,13 +23,29 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(VisibleAnywhere, BlueprintreadWrite, Category="Category")
+	UPROPERTY(VisibleAnywhere, BlueprintreadWrite, Category="Components")
 	UStaticMeshComponent* Mesh;
-	UPROPERTY(VisibleAnywhere, BlueprintreadWrite, Category="Category")
+	UPROPERTY(VisibleAnywhere, BlueprintreadWrite, Category="Components")
 	USphereComponent* SphereCollider; 
-	
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Info")
+	EItemType ItemType = EItemType::None;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Item Info")
+	FGenericItemInfo GenericItemInfo;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Info")
+	bool bRunCPP = false;
+
+	UPROPERTY(BlueprintReadWrite)
+	UCurveFloat* mFloatCurve = nullptr;
+
+	UPROPERTY(BlueprintReadWrite)
+	float mRotationDuration = 0.f;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	
+
+private:
+	float mCurrentRotation = 0.f;
 };

@@ -45,6 +45,7 @@ USTRUCT(BlueprintType)
 struct FItemInformationTable : public FTableRowBase
 {
 	GENERATED_BODY()
+	
 	UPROPERTY(EditAnywhere, BlueprintreadWrite, Category="Item Info")
 	EItemType ItemType;
 	UPROPERTY(EditAnywhere, BlueprintreadWrite, Category="Item Info")
